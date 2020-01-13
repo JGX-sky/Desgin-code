@@ -1,0 +1,51 @@
+#Processes{
+    width:90%;
+    margin:auto;
+    height:100px;
+    overflow:auto;
+}
+#Table_Scroll,#Detail_Table{
+    width:90%;
+    margin:auto;
+    height:500px;
+    overflow:auto;
+    visibility: hidden;
+}
+#Process_Table{
+    border-bottom: 2px solid;
+    border-color:darkcyan;
+}
+.Process_Table_Data{
+    /*border-bottom:1px solid;*/
+}
+#Detail_Table{
+    visibility: hidden;
+    
+}
+.Block{
+    width:40px;
+    height: 40px;
+    float:left;
+    background-color:blue;
+    margin:1px;
+    border:1px solid;
+    border-color: white;
+}
+.table_head{
+    border-bottom: 2px solid;
+    border-color:darkcyan;
+}
+.btn{
+    background-color: white;
+    transition-duration: 0.5s;
+    border:1px solid;
+    border-color:black;
+    height:30px;
+    width:60px;
+    font-size: 16px;
+}
+.btn:hover{
+    background-color:darkcyan;
+    border-color: darkcyan;
+    color:white;
+}

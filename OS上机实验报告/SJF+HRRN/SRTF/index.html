@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> SRT </title>
+    <link href="PCB.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <script src = "PCB.js" id="Last_Script"></script>
+    Number of Process : <input type = "text" id="Pro_Num"/>
+   
+    <button class="btn" onclick="Instantiate()">Set</button>
+    <p></p>
+    <div id = "Processes">
+        <p></p>
+        </div>
+        <div id="Table_Scroll">
+            <table id="Process_Table">
+                <tr>
+                    <th class="table_head">Process Name</th>
+                    <th class="table_head">Number of Instructions</th>
+                    <th class="table_head" colspan="2">Arrival at </th>
+                </tr>
+            </table>
+            <button style="margin:10px 5px;width:130px;" class="btn" onclick="Start()">Start Process</button>
+        </div>
+        <div id = "Detail_Table">
+                <table id="Process_Table2">
+                    <tr>
+                    <th class="table_head">Process Name</th>
+                    <th class="table_head">Total Instructions</th>
+                    <th class="table_head">Arrival</th>
+                    <th class="table_head">Completed Instructions</th>
+                    <th class="table_head">Instructions Remaining</th>
+                    </tr>
+                </table>
+        </div>
+    <script src = "PCB.js" id="Last_Script"></script>
+</body>
+</html>

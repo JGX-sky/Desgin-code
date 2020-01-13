@@ -1,0 +1,172 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style><!--表格的样式表-->
+			table{
+				border-left:1px solid #F00;
+				border-bottom:1px solid #F00;
+			}
+			table td{
+				border:0.5px solid #F00;
+				padding: 20px 10px 30px;
+			}
+			.jgx{
+				background-color:orange;
+			}
+			.jgx1{
+				background-color:pink;
+			}
+			.jgx2{
+				background-color:green;
+			}
+		</style>
+	</head>
+	
+	<body>
+	<div style="position:absolute;top :-50px;">
+		<table id="table1" cellspacing="0" style="margin:100px;" >
+				<tr>
+					<td style="padding: 20px 10px 30px;background-color:#3f0;" id="tr0">地址空间</td>
+					<td style="padding: 20px 10px 30px" id="tr1" class="jgx"></td>
+					<td style="padding: 20px 10px 30px" id="tr2" class="jgx"></td>
+					<td style="padding: 20px 10px 30px" id="tr3" class="jgx1"></td>
+					<td style="padding: 20px 10px 30px" id="tr4" class="jgx1"></td>
+					<td style="padding: 20px 10px 30px" id="tr5" class="jgx1"></td>
+					<td style="padding: 20px 10px 30px" id="tr6" class="jgx2"></td>
+					<td style="padding: 20px 10px 30px" id="tr7" class="jgx2"></td>
+					<td style="padding: 20px 10px 30px" id="tr8" class="jgx2"></td>
+				</tr>
+	
+				<tr>
+					<td style="padding: 20px 5px 20px;background-color:#3f0;" id="tr10">模块地址</td>
+					<td colspan=2 id="tr11" class="jgx"></td>
+					<td colspan=3 id="tr12" class="jgx1"></td>
+					<td colspan=3 id="tr13" class="jgx2"></td>
+				</tr>
+			
+		</table>
+				</div>
+				<div style="position:absolute; top:200px;">
+		 <table cellspacing="0px;" style="margin:100px;" id="table1">
+			<tbody>
+				<tr>
+					<td colspan=9 id="fft" style="padding: 20px 10px 30px"></td>
+				</tr>
+				<tr>
+					<td style="padding: 20px 10px 30px;background-color:#3f0;" id="tr20">内存空间</td>
+					<td style="padding: 20px 10px 30px" id="tr21"></td>
+					<td style="padding: 20px 10px 30px" id="tr22"></td>
+					<td style="padding: 20px 10px 30px" id="tr23"></td>
+					<td style="padding: 20px 10px 30px" id="tr24"></td>
+					<td style="padding: 20px 10px 30px" id="tr25"></td>
+					<td style="padding: 20px 10px 30px" id="tr26"></td>
+					<td style="padding: 20px 10px 30px" id="tr27"></td>
+					<td style="padding: 20px 10px 30px" id="tr28" ></td>
+				</tr>
+				<tr>
+					<td style="padding: 20px 10px 30px;background-color:#3f0;" id="tr10">模块地址</td>
+					<td colspan=2 id="tr221"></td>
+					<td colspan=3 id="tr222" ></td>
+					<td colspan=3 id="tr223" ></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+		<div id="zcr" style="width:100px;height:50px;position:absolute;top :242px;left:100px;background-color:#00Bfff;"></div>
+	</body>
+	<script type="text/javascript">
+	//将模拟内存的地址id装入数组，便于操作
+	var tr_1i=new Array();
+	for(var i=1;i<=8;i++)
+	tr_1i[i]="tr"+i;
+	var tr_2i=new Array();
+	for(var i=1;i<=8;i++)
+	tr_2i[i]="tr2"+i;
+	var ax=new Array();
+	//用于重定位寄存器的随机数，并写入
+	var res_random=Math.floor(Math.random()*10+20);
+	document.getElementById("zcr").innerHTML="重定位寄存器<br>"+res_random;
+	//加载内存单元的指令
+	for(var i=1;i<=8;i++){
+		var res=Math.floor(Math.random()*10+20);
+		ax[i]=res;
+		document.getElementById(tr_1i[i]).innerHTML="LOAD "+res;
+	}
+	//加载模块内容
+	var res=Math.floor(Math.random()*100+20);
+		document.getElementById("tr11").innerHTML="模块A<br>"+"首址：0<br>"+"尾址："+res;
+	var	res1=Math.floor(Math.random()*100+20);
+		document.getElementById("tr12").innerHTML="模块B<br>"+"首址：0<br>"+"尾址："+res1;
+	var	res2=Math.floor(Math.random()*100+20);
+		document.getElementById("tr13").innerHTML="模块C<br>"+"首址：0<br>"+"尾址："+res2;
+	//动态模拟装入和链接过程
+	var num=1;var count=1000;var flag=0;
+	var interval=setInterval(function(){//动态执行的函数
+		if(num<=8&&flag==0){//第一次直接装入
+			document.getElementById("fft").innerHTML="指令与模块装入中...";
+			document.getElementById("fft").style="text-align:center;background-color:#3ff";
+			var str=document.getElementById(tr_1i[num]).innerHTML;
+			document.getElementById(tr_2i[num]).innerHTML=str;
+			if(num==2)
+			document.getElementById("tr221").innerHTML="首址：0<br>"+"尾址："+res;
+			if(num==5)
+			document.getElementById("tr222").innerHTML="首址：0<br>"+"尾址："+res1;
+			if(num==8)
+			document.getElementById("tr223").innerHTML="首址：0<br>"+"尾址："+res2;
+		}
+		if(flag){//第二次扫描，进行地址转换和链接过程
+			document.getElementById("fft").innerHTML="程序运行链接中...";
+			document.getElementById("fft").style="text-align:center;background-color:#63c";
+			document.getElementById(tr_2i[num]).style="padding: 20px 10px 30px;background-color:yellow";
+			//写入样式
+			if(num!=1){
+				if(num==2){
+					document.getElementById(tr_2i[num-1]).style="padding: 20px 10px 30px;background-color:orange";
+					document.getElementById("tr221").innerHTML="首址：0"+"<br>"+"尾址："+res;
+					document.getElementById("tr221").style="padding: 20px 10px 30px;background-color:orange";
+				}
+				
+				if(num==3)
+					document.getElementById(tr_2i[num-1]).style="padding: 20px 10px 30px;background-color:orange";
+				if(num==4)
+					document.getElementById(tr_2i[num-1]).style="padding: 20px 10px 30px;background-color:pink";
+				if(num==5){
+					document.getElementById(tr_2i[num-1]).style="padding: 20px 10px 30px;background-color:pink";
+					document.getElementById("tr222").innerHTML="首址："+(res+1)+"<br>"+"尾址："+(res+1+res1);
+					document.getElementById("tr222").style="padding: 20px 10px 30px;background-color:pink";
+				}
+				
+				if(num==6)
+					document.getElementById(tr_2i[num-1]).style="padding: 20px 10px 30px;background-color:pink";
+				if(num==7)
+					document.getElementById(tr_2i[num-1]).style="padding: 20px 10px 30px;background-color:green";				
+				if(num==8){
+					document.getElementById(tr_2i[num-1]).style="padding: 20px 10px 30px;background-color:green";
+					document.getElementById("tr223").innerHTML="首址："+(res+1+res1+1)+"<br>"+"尾址："+(res+1+res1+1+res2);
+					document.getElementById("tr223").style="padding: 20px 10px 30px;background-color:green";
+				}
+			}
+			//document.getElementById(tr_2i[num-1]).style="padding: 20px 10px 30px;";
+			
+			var str=document.getElementById(tr_1i[num]).innerHTML;
+			document.getElementById(tr_2i[num]).innerHTML="LOAD "+(parseInt(ax[num])+res_random);
+		}
+		if(num>=8&&flag==1){//程序的结束条件，以及结束前的工作
+			document.getElementById(tr_2i[num]).style="padding: 20px 10px 30px;background-color:green";
+			document.getElementById("fft").innerHTML="程序结束";
+			document.getElementById("fft").style="text-align:center;background-color:#EE82EE";
+			clearInterval(interval);
+			interval=null;
+			return;
+		}
+		if(num>=8){
+			flag=1;
+			num-=8;
+		}
+		num++;
+	},count);
+	</script>
+</html>
+
+<!---->
